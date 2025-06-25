@@ -1,5 +1,6 @@
 import mongoose, { Schema, model } from "mongoose";
-import { Bcrypt } from '../utils/helper.js'
+import { Bcrypt, JWT } from '../utils/helper.js'
+
 const UserSchema = new Schema({
     name: { type: String, required: [true, 'name field is required'], trim: true, min: [2, 'min name lenght must be 2'] },
     email: { type: Schema.Types.String, required: [true, 'email field is required'], unique: true, index: true },
@@ -25,8 +26,25 @@ UserSchema.statics.register = async function (name, email, password) {
         return user
     } catch (error) {
         const err = new Error(error.message);
-        err.status = 400;
+        err.status = 500;
         throw err || new Error('Something went wrong while registering the user!');
+    }
+};
+
+UserSchema.statics.login = async function (email, password) {
+    try {
+        const user = email && await this.findOne({ email });
+        const isMatch = user && await Bcrypt.compare(password, user.password);
+        if (!user || !isMatch) {
+            const err = new Error('credential wrong');
+            err.status = 400;
+            throw err;
+        }
+        return user;
+    } catch (error) {
+        const err = new Error(error.message);
+        err.status = 500;
+        throw err || new Error('Something went wrong while login the user!');
     }
 }
 

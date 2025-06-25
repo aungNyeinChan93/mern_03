@@ -10,6 +10,14 @@ const testController = {
         } catch (error) {
             return next(error)
         }
+    },
+    auth: async (req, res, next) => {
+        try {
+            const { auth } = req;
+            auth && res.status(200).json({ auth })
+        } catch (error) {
+            return next(error)
+        }
     }
 };
 
