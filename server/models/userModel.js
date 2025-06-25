@@ -5,6 +5,8 @@ const UserSchema = new Schema({
     name: { type: String, required: [true, 'name field is required'], trim: true, min: [2, 'min name lenght must be 2'] },
     email: { type: Schema.Types.String, required: [true, 'email field is required'], unique: true, index: true },
     password: { type: String, required: [true, 'password field is required'] }
+}, {
+    timestamps: true
 });
 
 UserSchema.statics.register = async function (name, email, password) {

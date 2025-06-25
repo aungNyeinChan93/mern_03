@@ -5,6 +5,7 @@ import logMiddleware from './middlewares/logMiddleware.js';
 import errorMiddleware from './middlewares/errorMiddleware.js';
 import testRouter from './routes/testRouter.js';
 import authRouter from './routes/authRouter.js';
+import noteRouter from './routes/noteRouter.js';
 
 const app = express();
 
@@ -20,6 +21,7 @@ app.use(logMiddleware);
 // routes
 app.use('/api/v1/tests', testRouter)
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/notes', noteRouter)
 
 // error handaler
 app.use(errorMiddleware)

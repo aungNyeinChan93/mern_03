@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { VITE_PRODUCTS } from "../config/env";
+import ProductCard from "../components/others/ProductCard";
 
 const ComponentName = () => {
   const [products, setProducts] = useState([{ title: "koko" }]);
@@ -18,13 +19,13 @@ const ComponentName = () => {
   }, []);
   return (
     <React.Fragment>
-      <ul>
+      <div className="grid lg:grid-cols-4 gap-2 mx-10">
         {products &&
           products.length > 0 &&
           products.map((products, index) => {
-            return <li key={index}>{products.title}</li>;
+            return <ProductCard key={index} {...products} />;
           })}
-      </ul>
+      </div>
     </React.Fragment>
   );
 };
