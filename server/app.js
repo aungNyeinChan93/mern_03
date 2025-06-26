@@ -6,6 +6,7 @@ import errorMiddleware from './middlewares/errorMiddleware.js';
 import testRouter from './routes/testRouter.js';
 import authRouter from './routes/authRouter.js';
 import noteRouter from './routes/noteRouter.js';
+import bodyParser from 'body-parser';
 
 const app = express();
 
@@ -16,6 +17,8 @@ connectDb(() => {
 
 // middlewares
 app.use(express.json());
+app.use(bodyParser.urlencoded());
+app.use(bodyParser.json())
 app.use(logMiddleware);
 
 // routes
