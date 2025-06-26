@@ -25,15 +25,16 @@ const testController = {
         try {
             const { filter, sort, page = 1, auth, limit = 10 } = QueryString.parse(req.query);
             const skip = (parseInt(page) - 1) * parseInt(limit);
-            // for (let i in sort) {
-            //     sort[i] = parseInt(sort[i]);
-            // }
             Object.entries(sort).forEach(([key, value]) => {
                 sort[key] = Number(value);
             });
+            res.set('auth', QueryString.stringify(auth)) // add to res-header
+            res.set('filter', QueryString.stringify(filter))
             return res.status(200).json({
                 raw: req.query,
                 qs: { filter, sort, page: Number(page), auth, limit, skip },
+                seft: `http://${req.host}${req.originalUrl}`,
+                requestHeader: req.headers.test && req.get('test') // get from req-header
             })
         } catch (error) {
             return next(error)
