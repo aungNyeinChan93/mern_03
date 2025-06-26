@@ -1,4 +1,6 @@
 import QueryString from "qs";
+import { query, validationResult } from 'express-validator'
+
 
 const testController = {
     err: async (req, res, next) => {
@@ -35,6 +37,20 @@ const testController = {
                 qs: { filter, sort, page: Number(page), auth, limit, skip },
                 seft: `http://${req.host}${req.originalUrl}`,
                 requestHeader: req.headers.test && req.get('test') // get from req-header
+            })
+        } catch (error) {
+            return next(error)
+        }
+    },
+    // Express queryValidator
+    // url ->/api/v1/tests/express-validator
+    expressValidator: async (req, res, next) => {
+        try {
+            const { errors } = validationResult(req);
+            res.status(200).json({
+                meta: { message: 'query validator testing' },
+                data: {},
+                errors
             })
         } catch (error) {
             return next(error)
