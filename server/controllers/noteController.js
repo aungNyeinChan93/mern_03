@@ -1,9 +1,12 @@
+import mongoose from "mongoose";
 import NoteModel from "../models/noteModel.js";
 
 
 const noteController = {
     // Create Note
     create: async (req, res, next) => {
+        const session = await mongoose.startSession();
+        session.startTransaction();
         try {
             const { auth } = req;
             if (!auth) {
@@ -23,16 +26,30 @@ const noteController = {
                 message: 'Note create successfully',
                 result: note
             })
+            await session.commitTransaction();
         } catch (error) {
+            await session.abortTransaction();
             return next(error)
+        } finally {
+            await session.endSession()
         }
     },
-    // getAllNotes
+    /**
+     * Get All Notes 
+     * @method  -> get
+     * @url     -> {{host}}/api/v1/notes?fields=title,content
+     * @query   -> fields=???
+     * @request -> null
+    */
     notes: async (req, res, next) => {
         try {
-            const notes = await NoteModel.find().populate('owner', { name: 1 }).select('title content owner').lean();
+            const { fields } = req.query;
+            console.log(fields);
+
+            const onlyFields = fields ? fields.split(',') : [' '];
+            const notes = await NoteModel.find().populate('owner', { name: 1 }).select(onlyFields).lean();
             notes && res.status(200).json({
-                sccess: true,
+                success: true,
                 message: 'get all notes',
                 result: notes,
                 total: notes.length
@@ -47,7 +64,7 @@ const noteController = {
             const { auth } = req;
             const notes = await NoteModel.find({ owner: auth._id }).populate('owner', { name: 1 }).select('title content owner').lean();
             notes && res.status(200).json({
-                sccess: true,
+                success: true,
                 message: 'get all my notes',
                 result: notes,
                 total: notes.length
@@ -103,7 +120,7 @@ const noteController = {
                 res.status(400);
                 return next(new Error('Note delete fail'))
             }
-            note && res.status(200).json({
+            note && res.status(204).json({
                 success: true,
                 message: " get note successfully",
                 result: note

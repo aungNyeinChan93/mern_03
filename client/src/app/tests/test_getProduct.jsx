@@ -5,7 +5,11 @@ import ProductCard from "../components/others/ProductCard";
 const ComponentName = () => {
   const [products, setProducts] = useState([{ title: "koko" }]);
   const fetchProducts = async () => {
-    const res = await fetch(`${VITE_PRODUCTS}`);
+    const res = await fetch(`${VITE_PRODUCTS}`, {
+      method: "GET",
+      "Content-Type": "application/json",
+      Accept: "application/json",
+    });
     const data = await res.json();
     console.log(data);
     setProducts((pre) => (Array.isArray(data) ? [...pre, ...data] : [...pre]));
