@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import NoteModel from "../models/noteModel.js";
+import { validationResult } from "express-validator";
 
 
 const noteController = {
@@ -8,6 +9,13 @@ const noteController = {
         const session = await mongoose.startSession();
         session.startTransaction();
         try {
+            const { errors } = validationResult(req)
+            if (errors.length > 0) {
+                return res.status(400).json({
+                    success: false,
+                    errors
+                })
+            }
             const { auth } = req;
             if (!auth) {
                 res.status(401);
@@ -24,7 +32,7 @@ const noteController = {
             note && res.status(201).json({
                 success: true,
                 message: 'Note create successfully',
-                result: note
+                result: note,
             })
             await session.commitTransaction();
         } catch (error) {

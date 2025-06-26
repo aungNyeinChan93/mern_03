@@ -1,5 +1,5 @@
 import QueryString from "qs";
-import { query, validationResult } from 'express-validator'
+import { validationResult } from 'express-validator'
 
 
 const testController = {
