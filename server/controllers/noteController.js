@@ -43,17 +43,21 @@ const noteController = {
         }
     },
     /**
-     * Get All Notes 
-     * @method  -> get
-     * @url     -> {{host}}/api/v1/notes?fields=title,content
-     * @query   -> fields=???
-     * @request -> null
+     * Get All Notes by dynamic fields
+     * @method          -> get
+     * @url             -> {{host}}/api/v1/notes?fields=title,content
+     * @query           -> fields=[]
+     * @requestBody     -> null
+     * @responseBody    -> notes
     */
     notes: async (req, res, next) => {
         try {
+            const { auth } = req;
+            if (!auth) {
+                res.status(401);
+                return next(new Error('user is not authorize'))
+            }
             const { fields } = req.query;
-            console.log(fields);
-
             const onlyFields = fields ? fields.split(',') : [' '];
             const notes = await NoteModel.find().populate('owner', { name: 1 }).select(onlyFields).lean();
             notes && res.status(200).json({
@@ -84,6 +88,13 @@ const noteController = {
     // get note by note_id
     note: async (req, res, next) => {
         try {
+            const { errors } = validationResult(req);
+            if (errors.length > 0) {
+                return res.status(400).json({
+                    success: false,
+                    errors
+                })
+            }
             const { note_id } = req.params;
             const note = note_id && await NoteModel.findById(note_id).populate('owner', { password: 0, __v: 0 }).select('-__v').lean();
             if (!note) {
