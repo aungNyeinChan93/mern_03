@@ -76,15 +76,17 @@ const Navbar = () => {
 
           <div className="flex items-center ml-auto space-x-6">
             <button className="font-medium text-[15px] border-0 outline-0 cursor-pointer">
-              <a
-                href="javascript:void(0)"
-                className="text-blue-700 hover:underline"
-              >
+              <Link to="/auth/login" className="text-blue-700 hover:underline">
                 Login
-              </a>
+              </Link>
             </button>
-            <button className="px-4 py-2 text-sm rounded-xs font-medium text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 cursor-pointer">
-              Sign up
+            <button className="px-4 rounded py-2 text-sm  font-medium text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 cursor-pointer">
+              <Link
+                to="/auth/register"
+                className="text-white-700 rounded hover:underline"
+              >
+                Register
+              </Link>
             </button>
 
             <button id="toggleOpen" className="lg:hidden cursor-pointer">

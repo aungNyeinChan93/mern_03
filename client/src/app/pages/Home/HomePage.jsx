@@ -7,7 +7,7 @@ const HomePage = () => {
     <React.Fragment>
       {/* <h1>HomePageHomePageHomePage</h1> */}
       <Test />
-      <TestCors />
+      {/* <TestCors /> */}
     </React.Fragment>
   );
 };
