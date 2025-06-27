@@ -11,4 +11,6 @@ testRouter.get('/auth', authMiddleware, testController.auth);
 testRouter.get('/query', testController.query);
 testRouter.get('/express-validator', [query('name').notEmpty(), param('id').notEmpty()], testController.expressValidator);
 
+
+
 export default testRouter;
