@@ -7,6 +7,7 @@ import testRouter from './routes/testRouter.js';
 import authRouter from './routes/authRouter.js';
 import noteRouter from './routes/noteRouter.js';
 import bodyParser from 'body-parser';
+import cors from 'cors'
 
 const app = express();
 
@@ -19,6 +20,7 @@ connectDb(() => {
 app.use(express.json());
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json())
+app.use(cors({ origin: 'http://localhost:5173', methods: ['GET', 'POST', 'PUT', 'DELETE'] },))
 app.use(logMiddleware);
 
 // routes

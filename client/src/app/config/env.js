@@ -1,4 +1,4 @@
 
 // 
-export const { VITE_PRODUCTS } = import.meta.env;
+export const { VITE_PRODUCTS, VITE_SERVER_URL } = import.meta.env;
 

@@ -5,6 +5,9 @@ import { validationResult } from 'express-validator'
 const testController = {
     err: async (req, res, next) => {
         try {
+            res.append("Access-Control-Allow-Origin", "http://localhost:5173"); // !! is notwork?
+            res.append("Access-Control-Allow-Methods", "*");
+            res.append("Access-Control-Allow-Headers", "*");
             res.status(401);
             return next(new Error('test error'))
             // const err = new Error('test error');
@@ -47,7 +50,7 @@ const testController = {
     expressValidator: async (req, res, next) => {
         try {
             const { errors } = validationResult(req);
-            res.status(200).json({
+            res.status(400).json({
                 meta: { message: 'query validator testing' },
                 data: {},
                 errors
