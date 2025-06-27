@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import useRegister from "../../hooks/useRegister";
 import { VITE_SERVER_URL } from "../../config/env";
 import { useNavigate } from "react-router";

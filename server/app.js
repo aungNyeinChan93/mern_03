@@ -8,6 +8,7 @@ import authRouter from './routes/authRouter.js';
 import noteRouter from './routes/noteRouter.js';
 import bodyParser from 'body-parser';
 import cors from 'cors'
+import rateLimitMiddleware from './middlewares/rateLimitMiddleware.js';
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json())
 app.use(cors({ origin: 'http://localhost:5173', methods: ['GET', 'POST', 'PUT', 'DELETE'] },))
 app.use(logMiddleware);
+app.use(rateLimitMiddleware)
 
 // routes
 app.use('/api/v1/tests', testRouter)
