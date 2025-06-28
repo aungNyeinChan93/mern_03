@@ -18,9 +18,14 @@ const authController = {
             return next(error)
         }
     },
+    // domain/api/v1/auth/login
     login: async (req, res, next) => {
         try {
             const { email, password } = req.body;
+            if (!email, !password) {
+                res.status(400);
+                return next(new Error('Some Fields are required!'))
+            }
             const authUser = (email && password) && await UserModel.login(email, password);
             const token = authUser && await JWT.generateToken({ _id: authUser._id });
             const user = authUser && await UserModel.findById(authUser._id).select('-password -__v').lean()

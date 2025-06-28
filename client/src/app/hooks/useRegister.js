@@ -1,11 +1,8 @@
 import { useState } from "react";
 
-
 const useRegister = () => {
-
-    const [error, setError] = useState();
+    const [error, setError] = useState(null);
     const [isLoading, setLoading] = useState(false);
-
     const register = async (url, payload = {}) => {
         try {
             setLoading(true)
@@ -29,12 +26,11 @@ const useRegister = () => {
             return result && result;
         } catch (error) {
             setError(error.message)
-            console.error(error.message)
+            console.error(error)
         } finally {
             setLoading(false);
         }
     };
-
     return { register, error, isLoading }
 };
 

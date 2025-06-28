@@ -5,13 +5,16 @@ import ContactPage from './pages/Contact/ContactPage';
 import AuthLayout from './layouts/AuthLayout';
 import RegisterPage from './pages/Auth/RegisterPage';
 import LoginPage from './pages/Auth/LoginPage';
+import TestPage from './pages/Tests/TestPage';
+import NotFoundPage from './pages/Other/NotFoundPage';
 
 
 const router = createBrowserRouter([
     {
         path: '/', Component: MasterLayout, children: [
             { index: true, Component: HomePage },
-            { path: 'contact', Component: ContactPage }
+            { path: 'contact', Component: ContactPage },
+            { path: 'tests', Component: TestPage }
         ]
     },
     {
@@ -19,6 +22,9 @@ const router = createBrowserRouter([
             { path: 'register', Component: RegisterPage },
             { path: 'login', Component: LoginPage },
         ]
+    },
+    {
+        path: "*", Component: NotFoundPage
     }
 
 ]);

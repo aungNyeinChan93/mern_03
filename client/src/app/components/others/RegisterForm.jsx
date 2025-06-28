@@ -1,7 +1,8 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import useRegister from "../../hooks/useRegister";
 import { VITE_SERVER_URL } from "../../config/env";
 import { useNavigate } from "react-router";
+import toast, { Toaster } from "react-hot-toast";
 
 const RegisterForm = () => {
   const nameRef = useRef(null);
@@ -11,6 +12,8 @@ const RegisterForm = () => {
   const { register, isLoading, error } = useRegister();
 
   const navigate = useNavigate();
+
+  const errToast = (mess) => toast.error(mess, { duration: 2000 });
 
   const registerSubmit = async (e) => {
     e.preventDefault();
@@ -24,12 +27,19 @@ const RegisterForm = () => {
       formData
     );
     if (success) {
-      return navigate("/");
+      toast.success("Register Success!", { duration: 5000 });
+      return navigate("/auth/login");
     }
   };
 
+  // errToast
+  useEffect(() => {
+    if (error && Object.keys(error).length > 0) errToast(error);
+  }, [error]);
+
   return (
     <React.Fragment>
+      <Toaster position="top-center" />
       {isLoading && (
         <>
           <p>Loading . . . </p>

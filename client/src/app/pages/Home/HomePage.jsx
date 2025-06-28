@@ -1,13 +1,13 @@
 import React from "react";
-import Test from "../../tests/test_getProduct";
-import TestCors from "../../tests/test_cors";
+import { Toaster } from "react-hot-toast";
 
 const HomePage = () => {
   return (
     <React.Fragment>
-      {/* <h1>HomePageHomePageHomePage</h1> */}
-      <Test />
-      {/* <TestCors /> */}
+      <section>
+        <h2 className="p-2 text-lg text-red-500">Home Page</h2>
+        <Toaster />
+      </section>
     </React.Fragment>
   );
 };
