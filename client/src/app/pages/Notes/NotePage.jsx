@@ -6,6 +6,7 @@ import { VITE_SERVER_URL } from "../../config/env";
 import Loader from "../../components/base/Loader";
 import { Toaster } from "react-hot-toast";
 import RateLimit from "../../components/base/RateLimit";
+import Alert from "../../components/base/Alert";
 
 const NotePage = () => {
   const token = localStorage.getItem("token");
@@ -36,7 +37,9 @@ const NotePage = () => {
         )}
         {error && (
           <>
-            <div className="text-sm text-red-600 text-center">{error}</div>
+            <div className="lg:px-[70px]">
+              <Alert message={error} />
+            </div>
           </>
         )}
         {isLoading && (

@@ -63,6 +63,7 @@ const noteController = {
             const skip = (Number(page) - 1) * Number(limit);
 
             const onlyFields = fields ? fields.split(',') : [' '];
+            onlyFields && onlyFields?.push('createdAt')
             const notes = await NoteModel.find().populate('owner', { name: 1 })
                 .select(onlyFields).skip(skip).limit(limit).sort({ createdAt: -1 }).lean();
             notes && res.status(200).json({
