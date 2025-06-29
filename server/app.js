@@ -1,14 +1,14 @@
 import express from 'express';
-import { PORT } from './config/env.js'
-import connectDb from './database/connectDb.js';
-import logMiddleware from './middlewares/logMiddleware.js';
-import errorMiddleware from './middlewares/errorMiddleware.js';
-import testRouter from './routes/testRouter.js';
-import authRouter from './routes/authRouter.js';
-import noteRouter from './routes/noteRouter.js';
 import bodyParser from 'body-parser';
 import cors from 'cors'
+import connectDb from './database/connectDb.js';
+import { PORT } from './config/env.js'
+import authRouter from './routes/authRouter.js';
+import noteRouter from './routes/noteRouter.js';
+import testRouter from './routes/testRouter.js';
+import errorMiddleware from './middlewares/errorMiddleware.js';
 import rateLimitMiddleware from './middlewares/rateLimitMiddleware.js';
+import logMiddleware from './middlewares/logMiddleware.js';
 
 const app = express();
 
@@ -21,7 +21,7 @@ connectDb(() => {
 app.use(express.json());
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json())
-app.use(cors({ origin: 'http://localhost:5173', methods: ['GET', 'POST', 'PUT', 'DELETE'] },))
+app.use(cors({ origin: 'http://localhost:5173', methods: ['GET', 'POST', 'PUT', 'DELETE'] }))
 app.use(logMiddleware);
 app.use(rateLimitMiddleware)
 

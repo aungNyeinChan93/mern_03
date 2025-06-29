@@ -5,11 +5,12 @@ import useGetNotes from "../../hooks/useGetNotes";
 import { VITE_SERVER_URL } from "../../config/env";
 import Loader from "../../components/base/Loader";
 import { Toaster } from "react-hot-toast";
+import RateLimit from "../../components/base/RateLimit";
 
 const NotePage = () => {
   const token = localStorage.getItem("token");
 
-  const { notes, isLoading, error } = useGetNotes(
+  const { notes, isLoading, error, isRateLimit } = useGetNotes(
     `${VITE_SERVER_URL}/api/v1/notes?fields=content,title&page=1&limit=9`,
     token
   );
@@ -28,25 +29,36 @@ const NotePage = () => {
             </Link>
           </div>
         </div>
-        <div className="border border-green-300/30 flex justify-center items-center py-8 rounded-lg my-2 lg:min-h-100">
-          <div className=" grid md:grid-cols-2 lg:grid-cols-3 mx-auto gap-4 ">
-            {isLoading && (
-              <>
-                <Loader />
-              </>
-            )}
-            {error && (
-              <>
-                <div>{error}</div>
-              </>
-            )}
-            {notes &&
-              notes.length > 0 &&
-              notes.map((note) => {
-                return <NoteCard key={note._id} {...note} />;
-              })}
-          </div>
-        </div>
+        {isRateLimit && (
+          <>
+            <RateLimit />
+          </>
+        )}
+        {error && (
+          <>
+            <div className="text-sm text-red-600 text-center">{error}</div>
+          </>
+        )}
+        {isLoading && (
+          <>
+            <div className=" flex justify-center items-center">
+              <Loader />
+            </div>
+          </>
+        )}
+        {notes && !isRateLimit && !isLoading && !error && (
+          <>
+            <div className="border border-green-300/30 flex justify-center items-center py-8 rounded-lg my-2 lg:min-h-100">
+              <div className=" grid md:grid-cols-2 lg:grid-cols-3 mx-auto gap-4 ">
+                {notes &&
+                  notes.length > 0 &&
+                  notes?.map((note) => {
+                    return <NoteCard key={note._id} {...note} />;
+                  })}
+              </div>
+            </div>
+          </>
+        )}
       </section>
     </React.Fragment>
   );

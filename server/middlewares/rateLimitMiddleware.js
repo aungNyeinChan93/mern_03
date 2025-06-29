@@ -7,8 +7,9 @@ const rateLimitMiddleware = async (req, res, next) => {
         if (!success) {
             return res.status(429).json({
                 success: false,
+                message: `Rate Limited : ${reason}`,
                 error: {
-                    limit, reset: new Date(reset).toUTCString(), remaining, reason
+                    limit, reset: new Date(reset).toUTCString(), remaining
                 }
             })
         }

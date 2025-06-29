@@ -2,6 +2,8 @@
 
 A full-stack MERN (MongoDB, Express, React, Node.js) application.
 
+![Demo App](/client/public/vite.svg)
+
 ## Project Structure
 
 ```

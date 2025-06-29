@@ -8,10 +8,10 @@ const redis = new Redis({
     token: UPSTASH_TOKEN,
 })
 
-// define rate limit 10 by 30 sec
+// define rate limit 100 by 60 sec
 const reateLimit = new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(100, "60 s") // rate,time/s
+    limiter: Ratelimit.slidingWindow(10, "20 s") // rate,time/s
 });
 
 export default reateLimit; 
