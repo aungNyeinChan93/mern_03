@@ -10,7 +10,11 @@ const NoteCard = ({ _id, title, content, owner }) => {
           <span className="text-sm capitalize text-green-400 rounded flex">
             {owner?.name || "unknown"}
           </span>
-          <p>{content}</p>
+          <p>
+            {content && content?.length > 200
+              ? content?.substring(0, 200) + "  . . . "
+              : content}
+          </p>
           <div className="card-actions justify-between">
             <Link to={`/${_id}`} className="btn btn-primary btn-sm mt-2">
               Detail

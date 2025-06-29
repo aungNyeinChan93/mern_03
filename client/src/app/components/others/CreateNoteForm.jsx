@@ -30,7 +30,7 @@ const CreateNoteForm = () => {
         duration: 3000,
         position: "top-left",
       });
-      return navigate("/");
+      return navigate("/notes");
     }
   };
   return (

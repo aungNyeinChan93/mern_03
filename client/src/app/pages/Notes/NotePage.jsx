@@ -4,6 +4,7 @@ import NoteCard from "../../components/daisy/NoteCard";
 import useGetNotes from "../../hooks/useGetNotes";
 import { VITE_SERVER_URL } from "../../config/env";
 import Loader from "../../components/base/Loader";
+import { Toaster } from "react-hot-toast";
 
 const NotePage = () => {
   const token = localStorage.getItem("token");
@@ -16,6 +17,7 @@ const NotePage = () => {
   return (
     <React.Fragment>
       <section>
+        <Toaster position="top-center" />
         <div className=" flex justify-end items-center">
           <div className="flex items-center px-[3rem] py-2">
             <Link
@@ -31,6 +33,11 @@ const NotePage = () => {
             {isLoading && (
               <>
                 <Loader />
+              </>
+            )}
+            {error && (
+              <>
+                <div>{error}</div>
               </>
             )}
             {notes &&
