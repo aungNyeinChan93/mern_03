@@ -5,6 +5,7 @@ import { validationResult } from "express-validator";
 
 const noteController = {
     // Create Note 
+    // url -> host/api/v1/notes
     create: async (req, res, next) => {
         const session = await mongoose.startSession();
         session.startTransaction();

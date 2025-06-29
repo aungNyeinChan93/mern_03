@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef } from "react";
 import useLogin from "../../hooks/useLogin";
 import { VITE_SERVER_URL } from "../../config/env";
 import { useNavigate } from "react-router";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../contexts/authProvider";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -10,7 +11,8 @@ const LoginForm = () => {
   const passwordRef = useRef(null);
 
   const { login, isLoading, error } = useLogin();
-  const [authData, setAuthData] = useState(null);
+
+  const { setAuth } = useContext(AuthContext);
 
   const loginSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +25,7 @@ const LoginForm = () => {
       formdata
     );
     if (loginData?.success) {
-      setAuthData(loginData?.result ?? null);
+      setAuth(loginData?.result ?? null);
       toast.success(
         `Login Success : ${
           loginData && (loginData?.result.name ?? "unknown")
@@ -76,10 +78,10 @@ const LoginForm = () => {
             />
           </div>
 
-          <div className="flex">
+          {/* <div className="flex">
             <input type="checkbox" className="w-4" />
             <label className="text-sm ml-4 text-slate-900">Remember me</label>
-          </div>
+          </div> */}
 
           <button
             type="submit"

@@ -7,6 +7,8 @@ import RegisterPage from './pages/Auth/RegisterPage';
 import LoginPage from './pages/Auth/LoginPage';
 import TestPage from './pages/Tests/TestPage';
 import NotFoundPage from './pages/Other/NotFoundPage';
+import NotePage from './pages/Notes/NotePage';
+import NoteCreatePage from './pages/Notes/NoteCreatePage';
 
 
 const router = createBrowserRouter([
@@ -14,7 +16,9 @@ const router = createBrowserRouter([
         path: '/', Component: MasterLayout, children: [
             { index: true, Component: HomePage },
             { path: 'contact', Component: ContactPage },
-            { path: 'tests', Component: TestPage }
+            { path: 'tests', Component: TestPage },
+            { path: 'notes', Component: NotePage },
+            { path: 'notes/create', Component: NoteCreatePage },
         ]
     },
     {
