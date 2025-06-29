@@ -45,6 +45,18 @@ const Navbar = () => {
               </li>
               <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
                 <NavLink
+                  to={"/notes"}
+                  className={({ isActive }) =>
+                    isActive
+                      ? "hover:text-blue-700 text-blue-700 block font-medium text-[15px]"
+                      : "hover:text-blue-700 text-gray-700 block font-medium text-[15px]"
+                  }
+                >
+                  Notes
+                </NavLink>
+              </li>
+              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
+                <NavLink
                   to={"./contact"}
                   className={({ isActive }) =>
                     isActive
@@ -54,22 +66,6 @@ const Navbar = () => {
                 >
                   Contact
                 </NavLink>
-              </li>
-              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-                <a
-                  href="javascript:void(0)"
-                  className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
-                >
-                  Feature
-                </a>
-              </li>
-              <li className="max-lg:border-b max-lg:border-gray-300 max-lg:py-3 px-3">
-                <a
-                  href="javascript:void(0)"
-                  className="hover:text-blue-700 text-slate-900 block font-medium text-[15px]"
-                >
-                  Blog
-                </a>
               </li>
             </ul>
           </div>

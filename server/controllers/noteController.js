@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import NoteModel from "../models/noteModel.js";
 import { validationResult } from "express-validator";
+import QueryString from "qs";
 
 
 const noteController = {
@@ -46,7 +47,7 @@ const noteController = {
     /**
      * Get All Notes by dynamic fields
      * @method          -> get
-     * @url             -> {{host}}/api/v1/notes?fields=title,content
+     * @url             -> {{host}}/api/v1/notes?fields=title,content&page=1&limit=10
      * @query           -> fields=[]
      * @requestBody     -> null
      * @responseBody    -> notes
@@ -58,9 +59,12 @@ const noteController = {
                 res.status(401);
                 return next(new Error('user is not authorize'))
             }
-            const { fields } = req.query;
+            const { fields, page, limit } = QueryString.parse(req.query);
+            const skip = (Number(page) - 1) * Number(limit);
+
             const onlyFields = fields ? fields.split(',') : [' '];
-            const notes = await NoteModel.find().populate('owner', { name: 1 }).select(onlyFields).lean();
+            const notes = await NoteModel.find().populate('owner', { name: 1 })
+                .select(onlyFields).skip(skip).limit(limit).sort({ createdAt: -1 }).lean();
             notes && res.status(200).json({
                 success: true,
                 message: 'get all notes',

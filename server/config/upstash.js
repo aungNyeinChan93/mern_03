@@ -11,7 +11,7 @@ const redis = new Redis({
 // define rate limit 10 by 30 sec
 const reateLimit = new Ratelimit({
     redis,
-    limiter: Ratelimit.slidingWindow(3, "10 s") // rate,time/s
+    limiter: Ratelimit.slidingWindow(100, "60 s") // rate,time/s
 });
 
 export default reateLimit; 

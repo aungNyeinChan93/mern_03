@@ -3,6 +3,7 @@ import useCreateNote from "../../hooks/useCreateNote";
 import { VITE_SERVER_URL } from "../../config/env";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { Link } from "react-router";
 
 const CreateNoteForm = () => {
   const navigate = useNavigate();
@@ -58,13 +59,16 @@ const CreateNoteForm = () => {
           ></textarea>
         </fieldset>
 
-        <div>
+        <div className="flex justify-between items-center mt-2">
           <button
             className="btn btn-dash lg:ms-6 my-2 text-green-300"
             type="submit"
           >
             Cretae Note
           </button>
+          <Link to={"/notes"} className="btn btn-dash text-green-300 me-5">
+            ⬅️ Back
+          </Link>
         </div>
       </form>
     </React.Fragment>

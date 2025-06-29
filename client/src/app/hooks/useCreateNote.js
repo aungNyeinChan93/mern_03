@@ -20,8 +20,8 @@ const useCreateNote = () => {
             const createData = await response.json();
             console.log(createData);
             if (!response.ok) {
-                if (createData.error) {
-                    throw new Error(createData.error)
+                if (createData.errors) {
+                    throw new Error(createData.errors[0]?.msg)
                 }
                 throw new Error('note create Fail!')
             }
