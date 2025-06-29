@@ -9,6 +9,7 @@ import TestPage from './pages/Tests/TestPage';
 import NotFoundPage from './pages/Other/NotFoundPage';
 import NotePage from './pages/Notes/NotePage';
 import NoteCreatePage from './pages/Notes/NoteCreatePage';
+import NoteDetailPage from './pages/Notes/NoteDetailPage';
 
 
 const router = createBrowserRouter([
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
             { path: 'tests', Component: TestPage },
             { path: 'notes', Component: NotePage },
             { path: 'notes/create', Component: NoteCreatePage },
+            { path: 'notes/detail/:id', Component: NoteDetailPage },
         ]
     },
     {

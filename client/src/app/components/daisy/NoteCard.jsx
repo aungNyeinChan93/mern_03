@@ -31,7 +31,10 @@ const NoteCard = ({ _id, title, content, owner, createdAt }) => {
               : content}
           </p>
           <div className="card-actions justify-between">
-            <Link to={`/${_id}`} className="btn btn-primary btn-sm mt-2">
+            <Link
+              to={`/notes/detail/${_id}`}
+              className="btn btn-primary btn-sm mt-2"
+            >
               Detail
             </Link>
             {/* <Link to={`/notes`} className="btn btn-link btn-sm">
