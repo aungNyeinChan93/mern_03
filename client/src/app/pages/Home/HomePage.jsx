@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { AuthContext } from "../../contexts/authProvider";
 import RateLimit from "../../components/base/RateLimit";
+import Banner from "../../components/others/Banner";
 
 const HomePage = () => {
   const [isRateLimit, setIsRateLimt] = useState(true);
@@ -13,12 +14,16 @@ const HomePage = () => {
 
   return (
     <React.Fragment>
+      <Toaster />
       <section>
         <h2 className="p-2 text-lg text-red-500">
-          Home Page || {auth?.name ?? "unknown"}
+          {/* Home Page || {auth?.name ?? "unknown"} */}
         </h2>
-        <Toaster />
-        {isRateLimit && <RateLimit />}
+        {/* {isRateLimit && <RateLimit />} */}
+      </section>
+
+      <section>
+        <Banner />
       </section>
     </React.Fragment>
   );
