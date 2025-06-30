@@ -16,6 +16,8 @@ const TestAxiosClient = () => {
     }
   };
 
+  console.log(">>>", import.meta.env.VITE_SERVER_URL);
+
   useEffect(() => {
     (async () => {
       await fetchData();

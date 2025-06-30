@@ -22,6 +22,7 @@ const NoteDetailPage = () => {
     );
     result && setNote(result);
   };
+
   useEffect(() => {
     call();
   }, [id]);
