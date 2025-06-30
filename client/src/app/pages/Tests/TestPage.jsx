@@ -3,6 +3,7 @@ import toast, { Toaster, ToastBar } from "react-hot-toast";
 import Test from "../../tests/test_getProduct";
 import TestCors from "../../tests/test_cors";
 import SampleCard from "../../components/daisy/SampleCard";
+import TestAxiosClient from "../../tests/test_axiosClient";
 
 const TestPage = () => {
   const notify = () => toast("Here is your toast.");
@@ -43,6 +44,10 @@ const TestPage = () => {
             deleniti molestias ab minima dolore odit necessitatibus quos fugit
             repellat asperiores.
           </p>
+        </section>
+
+        <section>
+          <TestAxiosClient />
         </section>
       </div>
     </React.Fragment>

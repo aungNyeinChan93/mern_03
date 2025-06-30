@@ -25,6 +25,12 @@ app.use(cors({ origin: 'http://localhost:5173', methods: ['GET', 'POST', 'PUT', 
 app.use(logMiddleware);
 app.use(rateLimitMiddleware)
 
+
+// test
+app.get('/demo', (req, res, next) => {
+    res.status(200).json('this is demo')
+})
+
 // routes
 app.use('/api/v1/tests', testRouter)
 app.use('/api/v1/auth', authRouter)
