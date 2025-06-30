@@ -10,6 +10,7 @@ import NotFoundPage from './pages/Other/NotFoundPage';
 import NotePage from './pages/Notes/NotePage';
 import NoteCreatePage from './pages/Notes/NoteCreatePage';
 import NoteDetailPage from './pages/Notes/NoteDetailPage';
+import NoteEditPage from './pages/Notes/NoteEditPage';
 
 
 const router = createBrowserRouter([
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
             { path: 'notes', Component: NotePage },
             { path: 'notes/create', Component: NoteCreatePage },
             { path: 'notes/detail/:id', Component: NoteDetailPage },
+            { path: 'notes/edit/:id', Component: NoteEditPage },
         ]
     },
     {

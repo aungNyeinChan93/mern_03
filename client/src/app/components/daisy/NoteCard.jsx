@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate } from "react-router";
 import { dateFormat } from "../../utils/helper";
-import { ListCollapse, Delete } from "lucide-react";
+import { ListCollapse, Delete, PenOff } from "lucide-react";
 import useDropNote from "../../hooks/useDropNote";
 import toast from "react-hot-toast";
 
@@ -51,6 +51,12 @@ const NoteCard = ({ _id, title, content, owner, createdAt, setNotes }) => {
               className="text-green-400 btn border border-b-green-600 btn-sm mt-2"
             >
               <ListCollapse size={14} />
+            </Link>
+            <Link
+              to={`/notes/edit/${_id}`}
+              className="text-yellow-400 btn border border-b-yellow-600 btn-sm mt-2"
+            >
+              <PenOff size={14} />
             </Link>
             <button
               type="button"

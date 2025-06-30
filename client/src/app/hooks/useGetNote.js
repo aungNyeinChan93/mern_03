@@ -17,7 +17,7 @@ const useGetNote = () => {
                 },
             });
             const noteData = await response.json();
-            console.log(noteData);
+            // console.log(noteData);
             return noteData
         } catch (error) {
             console.error(error);
