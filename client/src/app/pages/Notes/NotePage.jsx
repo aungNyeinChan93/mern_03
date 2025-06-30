@@ -11,7 +11,7 @@ import Alert from "../../components/base/Alert";
 const NotePage = () => {
   const token = localStorage.getItem("token");
 
-  const { notes, isLoading, error, isRateLimit } = useGetNotes(
+  const { notes, isLoading, error, isRateLimit, setNotes } = useGetNotes(
     `${VITE_SERVER_URL}/api/v1/notes?fields=content,title&page=1&limit=9`,
     token
   );
@@ -56,7 +56,9 @@ const NotePage = () => {
                 {notes &&
                   notes.length > 0 &&
                   notes?.map((note) => {
-                    return <NoteCard key={note._id} {...note} />;
+                    return (
+                      <NoteCard key={note._id} {...note} setNotes={setNotes} />
+                    );
                   })}
               </div>
             </div>

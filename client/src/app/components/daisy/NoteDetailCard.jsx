@@ -1,4 +1,4 @@
-import React, { use } from "react";
+import React from "react";
 import { dateFormat } from "../../utils/helper";
 import useDropNote from "../../hooks/useDropNote";
 import { useNavigate } from "react-router";
@@ -8,8 +8,8 @@ import Alert from "../base/Alert";
 const NoteDetailCard = ({ _id, title, content, createdAt, owner }) => {
   const navigate = useNavigate();
   const { dropNote: deleteNote, isLoading, error } = useDropNote();
-  const dropNote = async (_id) => {
-    const success = await deleteNote(_id);
+  const dropNote = async (id) => {
+    const success = await deleteNote(id);
     if (success) {
       toast.success("Delete success");
       return navigate("/notes");

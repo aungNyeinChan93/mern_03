@@ -41,7 +41,7 @@ const useGetNotes = (url, token) => {
     useEffect(() => {
         getNotes(url, token)
     }, [url, token])
-    return { notes, isLoading, error, isRateLimit }
+    return { notes, isLoading, error, isRateLimit, setNotes }
 };
 
 export default useGetNotes;

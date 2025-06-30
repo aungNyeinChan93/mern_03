@@ -1,8 +1,23 @@
 import React from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { dateFormat } from "../../utils/helper";
+import { ListCollapse, Delete } from "lucide-react";
+import useDropNote from "../../hooks/useDropNote";
+import toast from "react-hot-toast";
 
-const NoteCard = ({ _id, title, content, owner, createdAt }) => {
+const NoteCard = ({ _id, title, content, owner, createdAt, setNotes }) => {
+  const navigate = useNavigate();
+  const { dropNote } = useDropNote();
+
+  const deleteNote = async (id) => {
+    const success = await dropNote(id);
+    if (success) {
+      setNotes((pre) => pre.filter((n) => n._id !== id));
+      toast.success("Delete success");
+      return navigate("/notes");
+    }
+  };
+
   return (
     <React.Fragment>
       <div className="card card-border border border-t-green-400  hover:border-b-red-400 hover:border-t-0 bg-base-100 w-96 shadow-sm hover:shadow-2xl transition-shadow">
@@ -30,16 +45,21 @@ const NoteCard = ({ _id, title, content, owner, createdAt }) => {
               ? content?.substring(0, 200) + "  . . . "
               : content}
           </p>
-          <div className="card-actions justify-between">
+          <div className="card-actions justify-end items-center">
             <Link
               to={`/notes/detail/${_id}`}
-              className="btn btn-primary btn-sm mt-2"
+              className="text-green-400 btn border border-b-green-600 btn-sm mt-2"
             >
-              Detail
+              <ListCollapse size={14} />
             </Link>
-            {/* <Link to={`/notes`} className="btn btn-link btn-sm">
-              Back
-            </Link> */}
+            <button
+              type="button"
+              to={`/notes`}
+              className="text-red-400 btn border border-b-red-600 btn-sm mt-2"
+              onClick={() => deleteNote(_id)}
+            >
+              <Delete size={14} />
+            </button>
           </div>
         </div>
       </div>
