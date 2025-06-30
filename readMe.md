@@ -2,10 +2,18 @@
 
 A full-stack MERN (MongoDB, Express, React, Node.js) application.
 
-![Demo App](/client/public/vite.svg)
+<!-- ![Demo App](/client/public/vite.svg)
 ![Demo App](/client/public/react.svg)
 ![Demo App](/client/public/node.svg)
-![Demo App](/client/public/mongo.svg)
+![Demo App](/client/public/mongo.svg) -->
+
+![Demo App](/client/public/images/home.png)
+![Demo App](/client/public/images/notes.png)
+![Demo App](/client/public/images/contact.png)
+![Demo App](/client/public/images/login.png)
+![Demo App](/client/public/images/register.png)
+![Demo App](/client/public/images/createNote.png)
+
 
 ## Project Structure
 
