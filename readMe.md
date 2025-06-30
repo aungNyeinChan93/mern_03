@@ -7,11 +7,22 @@ A full-stack MERN (MongoDB, Express, React, Node.js) application.
 ![Demo App](/client/public/node.svg)
 ![Demo App](/client/public/mongo.svg) -->
 
+### Home Page
 ![Demo App](/client/public/images/home.png)
+
+### Notes Page
 ![Demo App](/client/public/images/notes.png)
+
+### Contact Page
 ![Demo App](/client/public/images/contact.png)
+
+### Login Page
 ![Demo App](/client/public/images/login.png)
+
+### Register Page
 ![Demo App](/client/public/images/register.png)
+
+### Create Note Page
 ![Demo App](/client/public/images/createNote.png)
 
 
