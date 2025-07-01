@@ -24,7 +24,7 @@ const NoteEditPage = () => {
     <React.Fragment>
       <section className="w-full mt-10">
         <div className="grid grid-cols-3 lg:mt-[150px] ">
-          <div className="col-start-2 border border-green-300 py-4  px-6 rounded-4xl shadow ">
+          <div className="col-start-2 border border-yellow-300 py-4  px-6 rounded-4xl shadow ">
             {oldNote && <UpdateNoteForm {...oldNote} />}
           </div>
         </div>

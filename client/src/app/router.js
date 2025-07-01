@@ -11,11 +11,12 @@ import NotePage from './pages/Notes/NotePage';
 import NoteCreatePage from './pages/Notes/NoteCreatePage';
 import NoteDetailPage from './pages/Notes/NoteDetailPage';
 import NoteEditPage from './pages/Notes/NoteEditPage';
+import authLoader from './loaders/authLoader';
 
 
 const router = createBrowserRouter([
     {
-        path: '/', Component: MasterLayout, children: [
+        path: '/', Component: MasterLayout, loader: authLoader, children: [
             { index: true, Component: HomePage },
             { path: 'contact', Component: ContactPage },
             { path: 'tests', Component: TestPage },

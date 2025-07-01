@@ -37,7 +37,27 @@ const authController = {
         } catch (error) {
             return next(error)
         }
+    },
+
+    // getUserInfo
+    userInfo: async (req, res, next) => {
+        try {
+            const { auth } = req;
+            if (!auth) {
+                res.status(403);
+                return next(new Error('token is required'));
+            }
+            auth.token = req.get('authorization').split(' ')[1];
+            return res.status(200).json({
+                success: true,
+                message: 'get userInfo success',
+                result: auth
+            })
+        } catch (error) {
+            return next(error.message);
+        }
     }
+
 }
 
 export default authController;

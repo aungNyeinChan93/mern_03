@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router";
 import axiosClient from "../../config/axiosClient";
 import toast, { Toaster } from "react-hot-toast";
+import { Loader } from "lucide-react";
 
 const UpdateNoteForm = ({ _id, title, content }) => {
   const [newtitle, setNewTitle] = useState(title);
@@ -9,12 +10,13 @@ const UpdateNoteForm = ({ _id, title, content }) => {
   const navigate = useNavigate();
 
   const [error, setError] = useState(null);
-  console.log(_id);
+  const [isLoading, setLoading] = useState(false);
 
   const noteUpdate = async (e) => {
     e.preventDefault();
 
     try {
+      setLoading(true);
       const { data } = await axiosClient.put(`/api/v1/notes/${_id}`, {
         title: newtitle,
         content: newContent,
@@ -22,6 +24,7 @@ const UpdateNoteForm = ({ _id, title, content }) => {
       if (data.success) {
         // console.log(data);
         toast.success("Note Update Success");
+        setLoading(false);
         return navigate("/notes");
       }
     } catch (error) {
@@ -66,25 +69,25 @@ const UpdateNoteForm = ({ _id, title, content }) => {
           <div className="flex justify-between items-center mt-2 card-actions">
             <button
               className={
-                true
+                isLoading
                   ? "btn btn-dash lg:ms-6 my-2 text-red-300 "
-                  : "btn btn-dash lg:ms-6 my-2 text-green-300"
+                  : "btn btn-dash lg:ms-6 my-2 text-yellow-300"
               }
               type="submit"
-              disabled={false}
+              disabled={isLoading}
             >
               <div className="w-40 flex justify-center items-center">
                 <span>
-                  {false && (
+                  {isLoading && (
                     <>
                       <Loader />
                     </>
                   )}
                 </span>
-                <span>{false ? "Updating ... " : "Update Note"}</span>
+                <span>{isLoading ? "Updating ... " : "Update Note"}</span>
               </div>
             </button>
-            <Link to={"/notes"} className="btn btn-dash text-green-300 me-5">
+            <Link to={"/notes"} className="btn btn-dash text-yellow-300 me-5">
               ⬅️ Back
             </Link>
           </div>

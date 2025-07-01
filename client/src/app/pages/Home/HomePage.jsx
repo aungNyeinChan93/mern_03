@@ -6,11 +6,11 @@ import Banner from "../../components/others/Banner";
 
 const HomePage = () => {
   const [isRateLimit, setIsRateLimt] = useState(true);
-  const { auth } = useContext(AuthContext);
-  console.log(
-    auth &&
-      Object.entries(auth).map(([k, value]) => (auth[k] = value.toUpperCase()))
-  );
+  // const { auth } = useContext(AuthContext);
+  // console.log(
+  //   auth &&
+  //     Object.entries(auth).map(([k, value]) => (auth[k] = value.toUpperCase()))
+  // );
 
   return (
     <React.Fragment>

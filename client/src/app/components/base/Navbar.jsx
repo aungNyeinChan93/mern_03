@@ -1,7 +1,17 @@
-import React from "react";
-import { NavLink, Link } from "react-router";
+import React, { useContext } from "react";
+import { NavLink, Link, redirect, useNavigate } from "react-router";
+import { AuthContext } from "../../contexts/authProvider";
 
 const Navbar = () => {
+  const { auth, setAuth } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const logout = async () => {
+    localStorage.removeItem("token");
+    setAuth(null);
+    // return redirect("/auth/login");
+    return navigate("/auth/login");
+  };
   return (
     <React.Fragment>
       <header className="flex shadow-lg py-4 px-4 sm:px-10 bg-white min-h-[70px] tracking-wide relative z-50">
@@ -71,19 +81,45 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center ml-auto space-x-6">
-            <button className="font-medium text-[15px] border-0 outline-0 cursor-pointer">
-              <Link to="/auth/login" className="text-blue-700 hover:underline">
-                Login
-              </Link>
-            </button>
-            <button className="px-4 rounded py-2 text-sm  font-medium text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 cursor-pointer">
-              <Link
-                to="/auth/register"
-                className="text-white-700 rounded hover:underline"
-              >
-                Register
-              </Link>
-            </button>
+            {auth && Object.keys(auth).length > 0 && (
+              <>
+                <button className="font-medium text-[15px] border-0 outline-0 cursor-pointer ">
+                  <span className="text-blue-700 hover:underline">
+                    {auth && auth?.name}
+                  </span>
+                </button>
+                <div className="px-4 rounded py-2 text-sm  font-medium text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 cursor-pointer">
+                  <button
+                    type="button"
+                    className="text-white-700 rounded hover:underline"
+                    onClick={logout}
+                  >
+                    Logout
+                  </button>
+                </div>
+              </>
+            )}
+
+            {!auth && (
+              <>
+                <button className="font-medium text-[15px] border-0 outline-0 cursor-pointer">
+                  <Link
+                    to="/auth/login"
+                    className="text-blue-700 hover:underline"
+                  >
+                    Login
+                  </Link>
+                </button>
+                <button className="px-4 rounded py-2 text-sm  font-medium text-white border border-blue-600 bg-blue-600 hover:bg-blue-700 cursor-pointer">
+                  <Link
+                    to="/auth/register"
+                    className="text-white-700 rounded hover:underline"
+                  >
+                    Register
+                  </Link>
+                </button>
+              </>
+            )}
 
             <button id="toggleOpen" className="lg:hidden cursor-pointer">
               <svg
