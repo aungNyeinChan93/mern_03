@@ -30,9 +30,16 @@ const UpdateNoteForm = ({ _id, title, content }) => {
     } catch (error) {
       console.error(error);
       if (error.response.status !== 200) {
+        if (error.response.status === 400) {
+          toast.error("Some Fields are required! ");
+          setError("Some Fields are required! ");
+          return;
+        }
         toast.error(error.message);
         setError(error.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 

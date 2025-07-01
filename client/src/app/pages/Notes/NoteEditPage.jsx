@@ -20,6 +20,8 @@ const NoteEditPage = () => {
     })();
   }, [id]);
 
+  // console.log(oldNote);
+
   return (
     <React.Fragment>
       <section className="w-full mt-10">

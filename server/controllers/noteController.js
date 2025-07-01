@@ -120,6 +120,11 @@ const noteController = {
     update: async (req, res, next) => {
         try {
             const { note_id } = req.params;
+            const { title, content } = req.body;
+            if (!title || !content) {
+                res.status(400)
+                return next(new Error('some fields are required!'))
+            }
             const note = note_id && await NoteModel.findByIdAndUpdate(note_id, req.body, { new: true })
                 .populate('owner', { password: 0, __v: 0 }).select('-__v').lean();
             if (!note) {
